@@ -1,6 +1,9 @@
 import dataclasses
+import math
 import random
 import numpy
+
+PROBABILITY_TOLERANCE = 1e-16
 
 
 @dataclasses.dataclass
@@ -14,8 +17,10 @@ class RandomGenerator:
         """ Adding constrains """
         if len(self.numbers) != len(self.probabilities):
             raise ValueError('The number of given numbers and probabilities must match.')
-        if sum(self.probabilities) != 1:
-            raise ValueError('Probabilities must sum up to 1.')
+        probability_sum = sum(self.probabilities)
+
+        if math.isclose(1.0,probability_sum , rel_tol=PROBABILITY_TOLERANCE):
+            raise ValueError(f'Probabilities must sum up to 1. Current sum is {probability_sum}')
 
     def next_num(self):
         """
@@ -48,7 +53,6 @@ class NumberContainer:
 if __name__ == '__main__':
     given_numbers = [-1, 0, 1, 2, 3]
     probabilities = [0.01, 0.3, 0.58, 0.1, 0.01]
-
     generator = RandomGenerator(given_numbers, probabilities)
     print('Probability per number: ', generator.prop_per_number)
     number_container = NumberContainer(generator)
