@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "random_generator"
+version = "0.0.1"
+requires-python = ">=3.10"
+dependencies = []
+[tool.setuptools.package-data]
+"random_generator" = ["py.typed"]
+[tool.setuptools.packages.find]
+where = ["src"]
