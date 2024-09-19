@@ -19,8 +19,8 @@ class RandomGenerator:
             raise ValueError('The number of given numbers and probabilities must match.')
         probability_sum = sum(self.probabilities)
 
-        if math.isclose(1.0,probability_sum , rel_tol=PROBABILITY_TOLERANCE):
-            raise ValueError(f'Probabilities must sum up to 1. Current sum is {probability_sum}')
+        if not math.isclose(1.0,probability_sum , rel_tol=PROBABILITY_TOLERANCE):
+            raise ValueError(f'Probabilities must sum up to 1. Current sum is {probability_sum}.')
 
     def next_num(self):
         """
